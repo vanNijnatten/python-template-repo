@@ -15,7 +15,7 @@ MODULES = sorted(
 )
 
 
-@pytest.mark.parametrize("module", ["archive_services", *MODULES])
+@pytest.mark.parametrize("module", ["python_template_repo", *MODULES])
 def test_module_imports_in_isolation(module: str) -> None:
     """Import each module in a fresh interpreter so import cycles surface regardless of order."""
     result = subprocess.run(
