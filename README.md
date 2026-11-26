@@ -10,7 +10,7 @@ The Python Template Repo is a project on...
 
 
 # First Steps When Using the Template Repo
-- `specify init my-project --ai claude`
+- `specify init --integration claude .`
 - Open Claude Code
 - `/specify "[Some description of what you want to build]"`
 - `/plan "[something]"`
