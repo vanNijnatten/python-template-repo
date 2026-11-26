@@ -82,7 +82,7 @@ jobs:
             - name: Install the project
               run: |
                 uv sync \
-                  --locker \
+                  --locked \
                   --all-extras
 
             - name: Run Ruff
@@ -136,7 +136,7 @@ jobs:
             - name: Install the project
               run: |
                 uv sync \
-                --locker \
+                --locked \
                 --all-extras
 
             - name: Run tests
