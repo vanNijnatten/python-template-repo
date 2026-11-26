@@ -1,21 +1,48 @@
+# Mirrors the checks in .github/workflows/smoke_test.yaml.
+# Python tools run through uv so their versions match uv.lock.
 repos:
+    - repo: local
+      hooks:
+          - id: ruff-format
+            name: ruff format
+            entry: uv run --locked ruff format
+            language: system
+            types_or: [python, pyi]
+            files: ^(src|tests)/
 
-  - repo: local
-    hooks:
-      - id: ruff-check
-        name: Run ruff check
-        entry: uv run ruff check --fix
-        language: system
-        types: [python]
+          - id: ruff-check
+            name: ruff check
+            entry: uv run --locked ruff check --fix --exit-non-zero-on-fix
+            language: system
+            types_or: [python, pyi]
+            files: ^(src|tests)/
 
-      - id: ruff-format
-        name: Run ruff format
-        entry: uv run ruff format
-        language: system
-        types: [python]
+          - id: mypy
+            name: mypy
+            entry: uv run --locked mypy src --config-file pyproject.toml
+            language: system
+            types_or: [python, pyi]
+            files: ^src/
+            pass_filenames: false
 
-      - id: mypy
-        name: Run mypy
-        entry: bash -c "uv run mypy src"
-        language: system
-        types: [python]
+          - id: terraform-fmt
+            name: terraform fmt
+            entry: terraform -chdir=terraform fmt -recursive
+            language: system
+            files: ^terraform/.*\.(tf|tfvars)$
+            pass_filenames: false
+
+          # No backend: validation needs no Azure credentials or state access.
+          - id: terraform-init
+            name: terraform init (no backend)
+            entry: terraform -chdir=terraform init -backend=false -input=false -no-color
+            language: system
+            files: ^terraform/.*\.(tf|tfvars)$|^terraform/\.terraform\.lock\.hcl$
+            pass_filenames: false
+
+          - id: terraform-validate
+            name: terraform validate
+            entry: terraform -chdir=terraform validate -no-color
+            language: system
+            files: ^terraform/.*\.(tf|tfvars)$|^terraform/\.terraform\.lock\.hcl$
+            pass_filenames: false

@@ -3,10 +3,19 @@
 ![Smoke Test](https://github.com/vanNijnattenDataCraft/python-template-repo/actions/workflows/smoke_test.yaml/badge.svg)
 [![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
 
-The MPython Template Repo is a project on learning maths using python...
+The Python Template Repo is a project on...
 
 - **Website:** https://projects.vannijnatten.dev/ptp
 - **Documentation:** https://docs.vannijnatten.dev/ptp
+
+
+# First Steps When Using the Template Repo
+- `specify init --integration claude .`
+- Open Claude Code
+- `/specify "[Some description of what you want to build]"`
+- `/plan "[something]"`
+- `/tasks "[something]"`
+- `/implement "[something]"`
 
 
 # Code of Conduct
